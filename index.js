@@ -3,7 +3,7 @@ const b = "hellya"
 
 // Create the bidimesional matrix
 let matrix = Array.from({ length: b.length + 1 }, () => {
-    return Array.from({ length: a.length }, () => null)
+    return Array.from({ length: a.length + 1 }, () => 0)
 })
 
 // Fill the first row
@@ -18,6 +18,21 @@ for (let i = 1; i <= b.length; i++) {
 
 console.log(matrix)
 
+for (let i = 1; i <= a.length; i++) {
+    for (let x = 1; x < b.length; x++) {
+        console.log(i, x)
+        if (a[i - 1] === b[x - 1]) {
+            matrix[i][x] = matrix[i - 1][x - 1]
+        } else {
+            const insertion = matrix[i - 1][x] + 1 // top cell
+            const deletion = matrix[i][x - 1] + 1// left cell
+            const substitution = matrix[i - 1][x - 1] + 1  // top-left cell
+            matrix[i][x] = Math.min(insertion, deletion, substitution)
+        }
+    }
+}
+
+console.log(matrix)
 // Fill the rest of the matrix
 // Iterate over each row
 /* for (let i = 1; i <= a.length; i++) {
