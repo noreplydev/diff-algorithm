@@ -1,41 +1,36 @@
-const str1 = "hello"
-const str2 = "helly"
-let grid = Array.from({length: str1.length}, e => Array.from({length: str2.length}, e => 0));
+const a = "hello"
+const b = "hellya"
 
-for (let i = 0; i < str1.length; i++) {
-  for (let x = 0; x < str2.length; x++) {
-    if (str1[i] === str2[x]) {
-      grid[i][x] = 1 
-    }
-  } 
+// Create the bidimesional matrix
+let matrix = Array.from({ length: b.length + 1 }, () => {
+    return Array.from({ length: a.length }, () => null)
+})
+
+// Fill the first row
+for (let i = 0; i <= a.length; i++) {
+    matrix[0][i] = i
 }
 
-const M = str1.length;
-const N = str2.length;
-
-// Create the matrix
-const matrix = Array(M + 1).fill(null).map(() => Array(N + 1).fill(0));
-
-// Fill the first row and column of the matrix
-for (let i = 0; i <= M; i++) {
-  matrix[i][0] = i;
+// Fill the first column
+for (let i = 1; i <= b.length; i++) {
+    matrix[i][0] = i
 }
-for (let j = 1; j <= N; j++) {
-  matrix[0][j] = j;
-}
-
-  // Fill the rest of the matrix
-  for (let i = 1; i <= M; i++) {
-    for (let j = 1; j <= N; j++) {
-      if (str1[i - 1] === str2[j - 1]) {
-        matrix[i][j] = matrix[i - 1][j - 1];
-      } else {
-        const deletion = matrix[i - 1][j] + 1;
-        const insertion = matrix[i][j - 1] + 1;
-        const substitution = matrix[i - 1][j - 1] + 1;
-        matrix[i][j] = Math.min(deletion, insertion, substitution);
-      }
-    }
-  }
 
 console.log(matrix)
+
+// Fill the rest of the matrix
+// Iterate over each row
+/* for (let i = 1; i <= a.length; i++) {
+  // Iterate over each column
+  for (let x = 1; x <= b.length; x++) {
+    if (str1[i - 1] === str2[x - 1]) {
+      matrix[i][x] = matrix[i - 1][x - 1];
+    } else {
+      const deletion = matrix[i - 1][x] + 1;
+      const insertion = matrix[i][x - 1] + 1;
+      const substitution = matrix[i - 1][x - 1] + 1;
+      matrix[i][x] = Math.min(deletion, insertion, substitution);
+    }
+  }
+} */
+
