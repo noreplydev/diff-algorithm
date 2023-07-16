@@ -16,10 +16,8 @@ for (let i = 1; i <= b.length; i++) {
     matrix[i][0] = i
 }
 
-console.log(matrix)
-
-for (let i = 1; i <= a.length; i++) {
-    for (let x = 1; x < b.length; x++) {
+for (let i = 1; i <= a.length; i++) { // for each row
+    for (let x = 1; x < b.length; x++) { // for each column item on the row
         console.log(i, x)
         if (a[i - 1] === b[x - 1]) {
             matrix[i][x] = matrix[i - 1][x - 1]
@@ -31,21 +29,4 @@ for (let i = 1; i <= a.length; i++) {
         }
     }
 }
-
-console.log(matrix)
-// Fill the rest of the matrix
-// Iterate over each row
-/* for (let i = 1; i <= a.length; i++) {
-  // Iterate over each column
-  for (let x = 1; x <= b.length; x++) {
-    if (str1[i - 1] === str2[x - 1]) {
-      matrix[i][x] = matrix[i - 1][x - 1];
-    } else {
-      const deletion = matrix[i - 1][x] + 1;
-      const insertion = matrix[i][x - 1] + 1;
-      const substitution = matrix[i - 1][x - 1] + 1;
-      matrix[i][x] = Math.min(deletion, insertion, substitution);
-    }
-  }
-} */
 
