@@ -1,5 +1,5 @@
-const a = "hello"
-const b = "hellya"
+const a = "this is a new text"
+const b = "this is a no new text"
 
 // Create the bidimesional matrix
 let matrix = Array.from({ length: b.length + 1 }, () => {
@@ -18,7 +18,6 @@ for (let i = 1; i <= b.length; i++) {
 
 for (let i = 1; i <= a.length; i++) { // for each row
     for (let x = 1; x < b.length; x++) { // for each column item on the row
-        console.log(i, x)
         if (a[i - 1] === b[x - 1]) {
             matrix[i][x] = matrix[i - 1][x - 1]
         } else {
@@ -29,4 +28,28 @@ for (let i = 1; i <= a.length; i++) { // for each row
         }
     }
 }
+
+let x = a.length + 1;
+let y = b.length + 1;
+const differences = [];
+
+while (y > 0 || x > 0) {
+    if (y > 0 && x > 0 && a[x - 1] === b[y - 1]) {
+        differences.unshift({ type: 'equal', value: a[x - 1] })
+        y--
+        x--
+    } else if (y > 0 && matrix[y][x] === matrix[y - 1][x] + 1) {
+        differences.unshift({ type: 'delete', value: a[y - 1] });
+        y--;
+    } else if (x > 0 && matrix[y][x] === matrix[y][x - 1] + 1) {
+        differences.unshift({ type: 'insert', value: b[x - 1] });
+        x--;
+    } else {
+        differences.unshift({ type: 'replace', value: b[x - 1] });
+        y--;
+        x--;
+    }
+}
+
+console.log(differences)
 
